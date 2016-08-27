@@ -1,2 +1,4 @@
 Caso apareça a mensagem: "Não foi possível conectar:", possivelmente falta iniciar os serviços do postgreSQL.
 Para fazer isso, olhar o arquivo: "Comandos para o Cloud9"
+
+A classe SESSIONMANAGER oferece opção para mostrar os dados atuais da sessão, é muito útil para fazer testes de execução.
