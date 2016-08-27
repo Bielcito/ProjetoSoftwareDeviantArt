@@ -1,5 +1,3 @@
---Categorias do deviantART.
-
 CREATE TABLE IF NOT EXISTS category(
     codcategory SERIAL NOT NULL PRIMARY KEY,
     categoryname VARCHAR(150),
@@ -54,5 +52,5 @@ CREATE TABLE IF NOT EXISTS thumb(
     height INTEGER,
     width INTEGER,
     istransparency BOOLEAN
-);;
+)
 
