@@ -12,6 +12,21 @@ CREATE TABLE IF NOT EXISTS author(
     type VARCHAR(150)
 );;
 
+CREATE TABLE IF NOT EXISTS stats(
+    codstats SERIAL NOT NULL PRIMARY KEY,
+    comments INTEGER,
+    favourites INTEGER
+);;
+
+CREATE TABLE IF NOT EXISTS content(
+    codcontent SERIAL NOT NULL PRIMARY KEY,
+    src VARCHAR(150),
+    filesize INTEGER,
+    height INTEGER,
+    width INTEGER,
+    istransparency BOOLEAN
+);;
+
 CREATE TABLE IF NOT EXISTS deviation(
     coddeviation SERIAL NOT NULL PRIMARY KEY,
     deviationid VARCHAR(150),
@@ -26,23 +41,8 @@ CREATE TABLE IF NOT EXISTS deviation(
     codauthor INTEGER references author(codauthor),
     codstats INTEGER references stats(codstats),
     publishedtime INTEGER,
-    isallowcommenst BOOLEAN,
+    isallowcomments BOOLEAN,
     codcontent INTEGER references content(codcontent)
-);;
-
-CREATE TABLE IF NOT EXISTS stats(
-    codstats SERIAL NOT NULL PRIMARY KEY,
-    comments INTEGER,
-    favourites INTEGER
-);;
-
-CREATE TABLE IF NOT EXISTS content(
-    codcontent SERIAL NOT NULL PRIMARY KEY,
-    src VARCHAR(150),
-    filesize INTEGER,
-    height INTEGER,
-    width INTEGER,
-    istransparency BOOLEAN
 );;
 
 CREATE TABLE IF NOT EXISTS thumb(

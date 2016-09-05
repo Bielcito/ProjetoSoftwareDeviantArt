@@ -15,3 +15,30 @@ Comandos básicos do POSTGRESQL, os blocos "< >" são parâmetros.
 '\q' = Fecha o terminal do PostgreSQL.
 
 -------
+
+Comandos para enviar para o git hub:
+
+Abra o terminal, e certifique-se de que está nos eguinte diretório: '~/workspace/deviantART STATS'.
+
+Depois é só digitar:
+
+    git add *
+    git commit -m "Comente o que quiser!"
+    git push origin master
+    
+Caso queira atualizar apenas N arquivos específicos (caso vc tenha modificado só algum ou outro, ou então, 
+não queira enviar modificações que outras pessoas fizeram):
+
+em vez de:
+    git commit -m "Comente o que quiser!"
+    
+usar:
+    git commmit filename1 filename2 ... filenameN -m "Comente o que quiser!"
+(é possível enviar apenas um arquivo também)
+
+DICA!!
+
+1) use 'git status' depois de 'git add *' para ver os arquivos modificados
+2) dê o commit no arquivo que quiser
+3) user 'git status' novamente para ver que o arquivo q vc commitou não está mais lá.
+4) se tudo estiver ok, é só dar o 'git push origin master', inserir o usuário, a senha, e pronto.

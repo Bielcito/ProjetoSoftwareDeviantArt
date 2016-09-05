@@ -53,17 +53,21 @@
         
         public function verifyAccessToken()
         {
-            /*if($_SESSION['LAST_ACTIVITY'] new DateTime('NOW'))
+            //Get the difference between STARTED and LAST_ACTIVITY in seconds on INT variable:
+            $interval = SessionManager::getAccessTokenTime()->diff(new DateTime('NOW'));
+            $diff = (new DateTime())->setTimeStamp(0)->add($interval)->getTimeStamp();
+            echo 'diff: '.$diff.'<br>';
+            
+            if($diff < 3600)
             {
-                echo $this->date;
-                echo date('d/m/Y H:i:s', strtotime('-1 min'));
-                echo 'ainda não deu tempo!';
+                echo 'ainda não deu tempo!<br>';
             }
             else
             {
-                $this->date = new DateTime('NOW');
+                echo 'deu tempo!<br>';
                 $this->generateAT();
-            }*/
+                SessionManager::updateAccessToken($this->AT);
+            }
         }
         
         public function getAT()
@@ -109,7 +113,6 @@
         private $client_secret;
         
         private $AT;
-        private $dateLastAT;
     }
 
 

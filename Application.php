@@ -1,6 +1,6 @@
 <?php
 
-    require_once('DeviantQuery.php');
+    require_once('DeviantManager.php');
     require_once('ConnectionDB.php');
     require_once('FileParser.php');
     
@@ -9,8 +9,8 @@
     {
         function Application()
         {
-            $this->token = new DeviantQuery(); // chamadas de API ao deviantART.
             $this->conDB = new ConnectionDB(); // inicia a conexão o PostgreSQL e realiza operações nele.
+            $this->deviantManager = new DeviantManager($this->conDB); // chamadas de API ao deviantART.
             $this->fileparser = new FileParser(); // lê um arquivo de comandos do PostgreSQL e os divide.
             $this->criarBancodeDados();
         }
@@ -30,7 +30,17 @@
             $this->conDB->execFromArray($this->fileparser->GetQueries());
         }
         
-        private $token;
+        public function getConDB()
+        {
+            return $this->conDB;
+        }
+        
+        public function getDeviantManager()
+        {
+            return $this->deviantManager;
+        }
+        
+        private $deviantManager;
         private $conDB;
         private $fileparser;
     }

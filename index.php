@@ -1,6 +1,8 @@
 <?php
-    require_once('SessionManager.php');
-    require_once('Application.php');
+    //Inclui as classes importantes para serem usadas neste arquivo. Diferentemente do comando 'include', o 'require_once'
+    //só inclui o arquivo se ele ainda não estiver incluido ainda.
+    require_once('SessionManager.php'); // Gerencia a sessão do php. Olha o arquivo 'README' para mais informações sobre sessão.
+    require_once('Application.php'); // 
     
     SessionManager::StartSession();
 ?>
@@ -17,12 +19,10 @@
     <body>
         <?php
             $app = new Application();
+            $results = $app->getDeviantManager()->newest("digitalart/paintings","digimon","0","8")->results;
             
-            /*$etc = new DeviantQuery;
+            $app->getDeviantManager()->execDeviant($results);
             
-            $etc->verifyAccessToken();*/
-            
-            //echo (new DateTime('NOW'))->sub(new DateInterval('PT1H'))->format('d/m/Y H:i:s');
             SessionManager::echoSessionStatus();
         ?>
         

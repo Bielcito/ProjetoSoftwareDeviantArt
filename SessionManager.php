@@ -27,6 +27,56 @@
             session_destroy(); 
         }
         
+        static function UpdateAccessToken($AT)
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            $_SESSION['ACCESS_TOKEN_TIME'] = new DateTime('NOW');
+            $_SESSION['ACCESS_TOKEN'] = $AT;
+        }
+        
+        static function getStarted()
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            if(isset($_SESSION['STARTED']))
+            {
+                return $_SESSION['STARTED'];
+            }
+        }
+        
+        static function getLastActivity()
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            if(isset($_SESSION['LAST_ACTIVITY']))
+            {
+                return $_SESSION['LAST_ACTIVITY'];
+            }
+        }
+        
+        static function getAccessTokenTime()
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            if(isset($_SESSION['ACCESS_TOKEN_TIME']))
+            {
+                return $_SESSION['ACCESS_TOKEN_TIME'];
+            }
+        }
+        
         static function echoSessionStatus()
         {
             echo 'last activity: ';
@@ -62,6 +112,44 @@
                 echo 'didn\'t set';
             }
             echo '<br>';
+            
+            echo 'access token time: ';
+            if(isset($_SESSION['ACCESS_TOKEN_TIME']))
+            {
+                echo $_SESSION['ACCESS_TOKEN_TIME']->format('d/m/y h:i:s');
+            }
+            else
+            {
+                echo 'didn\'t set';
+            }
+            echo '<br>';
+        }
+        
+        static function isChanged($var)
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            if(isset($_SESSION[$var]))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        static function get($var)
+        {
+            if(session_status() != PHP_SESSION_ACTIVE)
+            {
+                session_start();
+            }
+            
+            return $_SESSION[$var];
         }
     }
 ?>

@@ -13,10 +13,10 @@
         static function DB()
         {
             return array(
+                'dbhost' => 'localhost',
                 'dbname' => 'devartdb',
                 'dbuser' => 'postgres',
-                'dbpassword' => '1240',
-                'dbhost' => 'localhosT'
+                'dbpassword' => '1240'
             );
         }
     }

@@ -31,7 +31,8 @@
             {
                 if(!pg_query($this->dbconn, $array[$i]))
                 {
-                    echo 'Cannot execute '. $array[$i].'<br>';
+                    echo 'Cannot execute:<br>'. '<pre>'.$array[$i].'</pre>'.'<br>';
+                    echo '<pre>'.str_replace(["\r\n", "\r", "\n"], "<br/>", pg_last_error($this->dbconn)).'</pre>';
                 }
             }
             
@@ -42,13 +43,17 @@
         {
             $this->Connect();
             
-            if(!pg_query($this->dbconn, $query))
+            $result = pg_query($this->dbconn, $query);
+            
+            if(!$result)
             {
-                echo 'Cannot execute'. $query.'<br>';
-                echo pg_last_error;
+                echo 'Cannot execute:<br>'. '<pre>'.$query.'</pre>'.'<br>';
+                echo '<pre>'.str_replace(["\r\n", "\r", "\n"], "<br/>", pg_last_error($this->dbconn)).'</pre>';
             }
             
             $this->Close();
+            
+            return $result;
         }
         
         private $dbconn;
