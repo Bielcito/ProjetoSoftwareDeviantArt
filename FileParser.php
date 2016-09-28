@@ -4,7 +4,15 @@ class FileParser
 {
     function FileParser()
     {
-        $this->queries = $this->splitFileInQueries();
+        try
+        {
+            $this->queries = $this->splitFileInQueries();
+        }
+        
+        catch(Exception $e)
+        {
+            echo($e->getMessage());
+        }
     }
     
     public function getQueries()
@@ -15,7 +23,9 @@ class FileParser
     private function splitFileInQueries()
     {
         //Abre o arquivo:
-        $file = fopen("Categories.sql", "r") or die("Unable to open file!");
+        $file = fopen("Categories.sql", "r");
+        if(!$file)
+            throw new Exception("Exceção lançada: não foi possível abrir o arquivo!<br>");
         
         //Divide os comandos:
         $queries = explode(";;", fread($file, filesize("Categories.sql")));

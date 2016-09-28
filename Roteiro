@@ -1,0 +1,78 @@
+(X) Na função execDeviant() ainda não há inserção na tabela thumb para o autor. *FEITO*
+
+(X) Falta generalizar a função execDeviant() para inserir todos os resultados do array.
+
+(X) Falta arrumar o tamanho dos VARCHAR no arquivo 'Categories.sql'. 
+
+(X) Falta fazer tratamentos de erro em todo o código.
+
+(X) Falta criar tabelas para as categorias no banco de dados.
+
+(X) Falta pegar as categorias no deviantART e salvar no banco de dados.
+
+(X) Ajustar para salvar o deviant junto de suas categorias.
+
+(X) Criar classe para gerenciar o login do usuário no sistema e suas variáveis de sessão.
+
+() Criar classe para gerenciar ações que o usuário pode fazer no sistema, como favoritar um deviant, ou um outro usuário.
+
+========||========
+
+Para Larissa fazer:
+
+(X) Desenvolver o banco de dados para poder permitir que existam usuários (da nossa aplicação), que possa favoritar usuários (do deviantART) e deviations também.
+
+(Posteriormente podemos usar essa aplicação de forma que use o login do próprio deviantART, e fazer com que os favorites sejam inseridos no próprio deviantART (SE O USUÁRIO QUISER)).
+
+Seria interessante uma tabela para:
+
+Usuário *FEITO*
+UsuárioDeviation (relaciona usuários com deviations) *Eu fiz uma tabela lá, mas não sei se ela deve relacionar todo o deviation com um user ou só parte dele(no caso, o "favoritar")*
+UsuárioUsuário (relaciona usuários com usuários) *não sei se é pra relacionar um usuário do banco com outro usuário ou com um deviant do deviantART*
+
+========||========
+
+Para Moisés fazer:
+
+() Desenvolver a parte visual onde o usuário terá que fazer o login para favoritar os usuários/deviations.
+    A parte visual precisa ser:
+    - Simples, rápida, direta, clara, etc.
+    - Usuário digita a url e diretamente no index.php já aparece a tela de login com o campo "usuário" pronto para digitar.
+    - Estudando a possibilidade da senha ser algo super simples, talvez só números ou algo do tipo, para facilitar o acesso.
+    
+    Tente fazer o php também então. Vou fazer uma classe para gerenciar o cadastro e o login de usuários agora.
+    
+    => Olhar o arquivo LoginManager.php.
+    => Para rodar o sistema, basta abrir o seguinte link: "https://myphp-bielcito.c9.io/deviantARTSTATS/index.php".
+    => Caso diga que a aplicação não esteja rodando, clicar com o botão direito em index.php no menu à esquerda, e clicar em "run", e
+        atualizar a página do link acima.
+    => Para visualizar erros de compilação do php: abrir um terminal apertando Alt + T, usar o comando: "cd ~/lib/apache2/log", 
+        clicar no arquivo "error.log" com o mouse e clicar em "open".
+    => Recomendo você apagar tudo e salvar para "zerar" o arquivo a cada nova execução.
+    => Lembre-se que cada vez que você aperta f5 no link acima, é como se você rodasse o programa do início de novo, onde o código inicia no
+        index.php.
+        
+    (Sobre o banco de dados)
+    => Para visualizar as tabelas do banco de dados, vá em um terminal usando Alt + T, use os comandos descritos no arquivo
+        "Comandos para o Cloud9" para abrir o console do postgreSQL (que é o banco de dados que estamos usando).
+        - digite '\list' para listar os banco de dados.
+        - digite '\connect devartdb' para se conectar com o banco de dados do deviantART.
+        - digite 'dt' para desenhar as tabelas (dt = draw tables).
+        - digite '\d <nome da tabela>' para visualizar as colunas dela (d = define)
+    => Você também pode usar comandos de SQL no console do postgreSQL, basta escrever, inserir um ';' no fim e teclar ENTER.
+    => Ler o index.php para ver alguns exemplos de comandos que você pode usar.
+
+
+
+======================//=========================
+
+Coisas para se pesquisar no banco:
+- Você entra com alguma palavra-chave, então a aplicação deve procurar por ela no banco (seja pelo nome, 
+    ou tag, ou categoria do deviation) e retornar o(s) deviant(s) que fizeram aqueles deviations
+- Com o resultado da busca acima, olhar quais deviants estão abertos a comissions
+- Mostrar os deviants com maior número de comments e/ou favourites (para a pesquisa do item 1)
+- Olhar o publishedtime para escolher entre os mais novos ou mais antigos deviations
+- Procurar por Galeries e/ou Groups referentes ao conteúdo buscado
+
+OBRIGADO! \/o
+Tou terminando a tela de cadastro #gabriel.
