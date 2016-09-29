@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS category(
     codcategory SERIAL NOT NULL PRIMARY KEY,
-    categoryname VARCHAR(30),
-    categorypath VARCHAR(70)
+    categoryname VARCHAR(50),
+    categorypath VARCHAR(100) UNIQUE
 );;
 
 CREATE TABLE IF NOT EXISTS author(
@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS tag(
     codtag SERIAL NOT NULL PRIMARY KEY,
     tagname VARCHAR(200) NOT NULL,
     sponsored BOOLEAN,
-    sponsor VARCHAR(200)
+    sponsor VARCHAR(200),
+    coddeviation INTEGER references deviation(coddeviation)
 );;
 
 CREATE TABLE IF NOT EXISTS deviation(
@@ -49,8 +50,7 @@ CREATE TABLE IF NOT EXISTS deviation(
     codstats INTEGER references stats(codstats),
     publishedtime INTEGER,
     isallowcomments BOOLEAN,
-    codcontent INTEGER references content(codcontent),
-    codtag INTEGER references tag(codtag)
+    codcontent INTEGER references content(codcontent)
 );;
 
 CREATE TABLE IF NOT EXISTS thumb(

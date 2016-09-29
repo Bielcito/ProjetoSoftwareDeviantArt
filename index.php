@@ -2,14 +2,14 @@
     
     //Importa a página login.php para o index.php, assim ela abre na página inicial:
 
-    //Inclui as classes importantes para serem usadas neste arquivo. Diferentemente do comando 'include', o 'require_once'
-    //só inclui o arquivo se ele ainda não estiver incluido ainda.
-    require_once('Application.php');
-    $app = new Application();
+    ini_set('max_execution_time', 5000);
+
+    require_once('Application.php');    //Inclui as classes importantes para serem usadas neste arquivo. Diferentemente do comando 'include', o 'require_once' só inclui o arquivo se ele ainda não estiver incluido ainda.
+    $app = new Application(); // Aplicação, só existe uma dela por página.
+
+    //Os três ifs a seguir foram muito utilizados em tempo de execução para poupar tempo e realizar testes rápidos no navegador:
     
-    //Caso esteja escrito "?c=deleteAllDeviations" no fim da url, na barra de endereços do navegador
-    //o banco de Dados deleta todos os deviations.
-    if(isset($_GET['c']))
+    if(isset($_GET['c']))//Caso esteja escrito "?c=deleteAllDeviations" no fim da url na barra de endereços do navegador, o banco de Dados deleta todos os deviations, CUIDADO!
     {
         if($_GET['c'] == 'deleteAllDeviations')
         {
@@ -18,7 +18,7 @@
         }
     }
     
-    if(isset($_GET['c']))
+    if(isset($_GET['c']))//O mesmo que o caso anterior, mas com outra frase. Neste caso, ele recria o banco de dados através do método criarBancoDeDados do Application.
     {
         if($_GET['c'] == 'criarBancoDeDados')
         {
@@ -26,59 +26,58 @@
             $app->criarBancoDeDados();
         }
     }
+
+    if(isset($_GET['c']))//Este aqui é para mostrar as informações do php na tela, serviu para saber principalmente a posição do arquivo de configuração "php.ini" onde tive que setar diversos plugins para o sistema. Como por exemplo, o curl_init() e pg_connect().
+    {
+        if($_GET['c'] == 'phpinfo')
+        {
+            phpinfo();
+            die();
+        }
+    }
     
     //Executar as operações dentro do escopo do try para que caso haja alguma exceção, ela seja tratada.
     try
     {
-        //CATEGORIAS!
-        /*$qcat = $app->getDeviantManager()->categories('%2F');
-        while(!$qcat)
-        {
-            throw new Exception("Deviant Art recusou o pedido inicial!<br>");
-            sleep(1);
-            $qcat = $app->getDeviantManager()->categories('%2F');
-        }
-        
-        $app->getDeviantManager()->execCategories($qcat);*/
-        
-        
-        //DADOS NEWEST!
+        //As seguintes instruções são exemplos de algumas formas de como se fazer inserções no banco de dados:
+
         /*$var = "Magus Bride";
-        $results = $app->getDeviantManager()->newest("", str_replace(' ', '%20', $var), "0", "24");
-        var_dump($results);
+        $results = $app->getDeviantManager()->newest("", str_replace(' ', '%20', $var), "24", "1");
         while(is_null($results))
         {
             sleep(1);
-            $results = $app->getDeviantManager()->newest("", str_replace(' ', '%20', $var), "0", "24");
+            $results = $app->getDeviantManager()->newest("", str_replace(' ', '%20', $var), "24", "1");
         }
         $app->getDeviantManager()->execDeviant($results->results);*/
         
-        //DADOS TAG!
+        //--
+
         /*$var = "WaterColor";
-        $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), "0", "24");
+        $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), "744", "24");
         while(is_null($results))
         {
             sleep(1);
-            $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), "0", "24");
+            $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), "744", "24");
         }
         
         while($results->has_more)
         {
             $app->getDeviantManager()->execDeviant($results->results);
             $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), $results->next_offset, "24");
-            while($results == null)
+            while(is_null($results))
             {
+                error_log("Repitiu no $results->next_offset :(");
                 sleep(1);
-                $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), "0", "24");
+                $results = $app->getDeviantManager()->tag(str_replace(' ', '%20', $var), $results->next_offset, "24");
             }
         }*/
-        
-        //ATUALIZAR TAG!
+
+        //--
+
         //$app->getDeviantManager()->atualizarTags();
-        
-        
-        
-        
+
+        //--
+
         //Verifica se enviaram uma variável chamada 'username' do tipo POST para esta página,
         //Se for verdadeiro, então tenta logar no banco com o usuário e senha descritos.
         if(SessionManager::isPost('username'))
@@ -109,7 +108,7 @@
             echo 'caminho: '.$result->categorypath.'<br><br>';
         }
         
-        //Teste para verificar se um email está disponível:
+        //Teste para verificar se um email está disponível para ser cadastrado:
         /*if($app->getLoginManager()->isEmailAvailable("shiha_hta_htinha@hotmail.com"))
         {
             echo "Email1 disponível!<br>";
@@ -119,7 +118,7 @@
             echo "Email2 disponível!<br>";
         }*/
         
-        //Teste para verificar se um usuário está disponível:
+        //Teste para verificar se um usuário está disponível para ser cadastrado:
         //if($app->getLoginManager()->isUserAvailable("OMestreDosMagos"))
         //{
         //    echo "Usuário disponível!<br>";
@@ -128,30 +127,16 @@
         //Exemplo que tenta logar um usuário:
         //$app->getLoginManager()->login("Fred", "123456");
         
-        //Use isto para deslogar:
+        //Use isto para deslogar um usuário:
         //$app->getLoginManager()->logout();
-        
-        //Exemplo que pesquisa deviations pela API e os salva no banco de dados:
-        
-        //Atualiza as tags do banco de dados:
-        //$app->getDeviantManager()->atualizarTags();
-        
-        //Exemplo que pesquisa tag de alguns deviantids e salva no banco de dados:
-        /*$deviationids = [
-            "45059129-D879-53FC-FE2B-311911C87310",
-            "109D0786-280F-02E6-9C4F-4CF155B80864"
-        ];
-        $results = $app->getDeviantManager()->deviantInf($deviationids);
-        $app->getDeviantManager()->execDeviantInf($results);*/
-        
-        //Exemplo que salva todas as categorias do deviantART no banco de dados:
     }
     
     catch(Exception $e)
     {
+        //Trata qualquer exceção que acontecera dentro do método Try.
         echo $e->getMessage();
     }
     
-    //Imprime estado atual da sessão:
+    //Imprime estado atual da sessão, desabilite caso não queira mostrar a sua senha na tela inicial:
     SessionManager::echoSessionStatus();
 ?>

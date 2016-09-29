@@ -1,4 +1,10 @@
-Caso apareça a mensagem: "Não foi possível conectar:", possivelmente falta iniciar os serviços do postgreSQL.
-Para fazer isso, olhar o arquivo: "Comandos para o Cloud9"
+Observações sobre o projeto:
+	TRYs e CATCHs:
+		Não utilizamos muitos try e catches, pois por definição, quando uma exceção é lançada o sistema é parado naquele ponto e para de executar.
+		Por minhas pesquisas, não há como aquele determinado método continuar rodando depois de lançar uma exceção.
+		Em um sistema como este, é preferível você tratar o erro de alguma forma e continuar com a execução do sistema, pois isso é muito mais interessante para o usuário.
 
-A classe SESSIONMANAGER oferece opção para mostrar os dados atuais da sessão, é muito útil para fazer testes de execução.
+	URLs nas requisições do PHP:
+		No DeviantManager existem vários métodos que fazem requisições à API do deviantART.
+		Para cada requisição você tem uma url e um conjunto de variáveis, as quais você deve juntar e criar uma string que tenha o formato GET, que é aceito pela API.
+		No entanto, cada método possui sua própria forma de criar essa url. Por conta disso, não teve como criar uma função genérica que gerasse essa url.
