@@ -13,7 +13,8 @@
             $this->conDB = new ConDB(); // inicia a conexão o PostgreSQL e realiza operações nele.
             $this->deviantManager = new DeviantManager($this->conDB); // chamadas de API ao deviantART.
             $this->fileparser = new FileParser(); // lê um arquivo de comandos do PostgreSQL e os divide.
-            $this->loginManager = new LoginManager($this->conDB);
+            $this->loginManager = new LoginManager($this->conDB); // gerencia os logins
+            $this->deviantManager->verifyAccessToken();
             //$this->criarBancodeDados();
         }
         

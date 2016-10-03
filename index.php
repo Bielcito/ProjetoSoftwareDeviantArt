@@ -14,7 +14,7 @@
         if($_GET['c'] == 'deleteAllDeviations')
         {
             echo 'APAGOU TUDO!!<br>';
-            $app->deleteAllDeviations();
+            //$app->deleteAllDeviations();
         }
     }
     
@@ -39,9 +39,16 @@
     //Executar as operações dentro do escopo do try para que caso haja alguma exceção, ela seja tratada.
     try
     {
+        //$app->getDeviantManager()->atualizarContents();
+
+
+        //Exemplo atualizando o content de um deviation passando um deviationid e o coddeviation referente a ele:
+        //$result = $app->getDeviantManager()->fetchDeviationID("AAF1856E-80E0-44FC-D3FC-F1149112F463");
+        //$app->getDeviantManager()->execFetchDeviationID($result, 1);
+
         //As seguintes instruções são exemplos de algumas formas de como se fazer inserções no banco de dados:
 
-        /*$var = "Magus Bride";
+        /*$var = "Megaman";
         $results = $app->getDeviantManager()->newest("", str_replace(' ', '%20', $var), "24", "1");
         while(is_null($results))
         {
@@ -96,6 +103,8 @@
         {
             require_once('login.php');
         }
+
+
         
         //Para pesquisar no banco de dados, fazer da seguinte forma:
         /*$algumacoisa = 'Fantasy';

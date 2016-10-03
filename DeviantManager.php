@@ -100,12 +100,114 @@
             
             return $json;
         }
+
+        //Faz a requisição das informações do deviation que possui id igual a $deviationid, retorna uma variável do tipo JSON.
+        public function fetchDeviationID($deviationid)
+        {
+            $curl = curl_init();
+
+            if(!$curl)
+            {
+                return false;
+            }
+            
+            $url = 'https://www.deviantart.com/api/v1/oauth2/deviation/'.$deviationid.'?access_token='.$this->getAT();
+            
+            echo 'Requisition: <br>'.$url.'<br>';
+            
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1, 
+                CURLOPT_URL => $url, 
+                CURLOPT_USERAGENT => $_SERVER ['HTTP_USER_AGENT'],
+                CURLOPT_SSL_VERIFYPEER => TRUE,
+                CURLOPT_CAINFO => __DIR__ . "/cacert.pem" 
+                ));
+                
+            $resp = curl_exec($curl); //isso aqui tbm tem q colocar sempre
+
+            if(curl_error($curl))
+            {
+                error_log(curl_error($curl), 0);
+                return false;
+            }
+            
+            if($resp) // Caso haja uma resposta...
+            {
+                $json = json_decode($resp);
+
+                if(json_last_error() != JSON_ERROR_NONE) // Caso a conversão da resposta para JSON dê algum problema...
+                {
+                    error_log("Error on json_decode(resp)", 0);
+                    sleep(180);
+                    return false;
+                }
+            }
+            else
+            {
+                error_log("Error on resp", 0);
+                var_dump($resp);
+                return false;
+            }
+
+            curl_close($curl); // É sempre recomendável fechar as variáveis $curl após utilizá-las.
+            
+            return $json;
+        }
+
+        //Recebe uma variável $s do tipo JSON e $coddeviation do tipo string, e salva o codcontent do JSON no banco de dados, no deviation com coddeviation igual a $coddeviation:
+        public function execFetchDeviationID($s, $coddeviation)
+        {
+            var_dump($s);
+            $src; $height; $width; $transparency; $filesize;
+
+            if(array_key_exists('content', $s))
+            {
+                $src = $this->g($s->content->src);
+                $height = $this->g($s->content->height);
+                $width = $this->g($s->content->width);
+                $transparency = $this->g($s->content->transparency);
+                $filesize = $this->g($s->content->filesize);
+
+                $this->conDB->begin();
+
+                //Insere o content:
+                $query = "INSERT INTO content VALUES(default, $src, $filesize, $height, $width, $transparency) RETURNING codcontent";
+                $aux = $this->conDB->exect($query);
+                if(!$result = pg_fetch_object($aux))
+                {
+                    throw new Exception("Exceção lançada: Não foi possível inserir o content.");
+                }
+
+                //Aponta o deviation com coddeviation igual a $coddeviation para o content:
+                $query = "UPDATE deviation SET codcontent = $result->codcontent WHERE coddeviation = $coddeviation";
+                $aux = $this->conDB->exect($query);
+                $this->conDB->commit();
+            }
+            else
+            {
+                $query = "UPDATE deviation SET codcontent = 0 WHERE coddeviation = $coddeviation";
+                $aux = $this->conDB->exec($query);
+            }
+        }
         
         //Para cada deviation que existir no banco pega a identificação deles e cria um array com tamanho e passa eles para o método deviantInf(). São passadas 50 identificações por vez, que é o limite da API.
         public function atualizarTags()
         {
+            //Pega o valor a partir do qual irá fazer a pesquisa das tags:
+            $query = "SELECT coddeviation FROM tag ORDER BY coddeviation DESC LIMIT 1";
+            $aux = $this->conDB->exec($query);
+
+            if(!$result = pg_fetch_object($aux))
+            {
+                $valor = 0;
+            }
+            else
+            {
+                $valor = $result->coddeviation;
+            }
+
             //Seleciona todos os deviations do banco ordenados por seu código, caso dê algum problema na execução, será possível continuar de onde parou.
-            $query = "SELECT deviationid FROM deviation ORDER BY coddeviation";
+            $query = "SELECT deviationid FROM deviation WHERE coddeviation >= $valor ORDER BY coddeviation";
             $aux = $this->conDB->exec($query);
 
             $contador = 0;
@@ -160,6 +262,29 @@
 
                     break;
                 }
+            }
+        }
+
+        //APAGAR DEPOIS!
+        public function atualizarContents()
+        {
+            $query = "SELECT deviation.deviationid, deviation.coddeviation FROM deviation WHERE deviation.codcontent IS NULL ORDER BY coddeviation";
+            $aux = $this->conDB->exec($query);
+
+            while($result = pg_fetch_object($aux))//Para cada deviation no banco...
+            {
+                //Faz a requisição do JSON pedindo o dados deste deviation.
+                $json = $this->fetchDeviationID($result->deviationid);
+
+                while($json == null)
+                {
+                    error_log("json is null", 0);
+                    sleep(1);
+                    $json = $this->fetchDeviationID($result->deviationid);
+                }
+
+                //Trata o JSON e salva o content do deviation no banco de dados.
+                $this->execFetchDeviationID($json, $result->coddeviation);
             }
         }
         
@@ -252,7 +377,7 @@
                     $coddeviation;
                     if(!$coddeviation = pg_fetch_object($aux)->coddeviation)
                     {
-                        throw new Exception('<pre>Exceção lançada: Não foi possível achar o coddeviation do deviationid passado</pre><br>');
+                        throw new Exception('Exceção lançada: Não foi possível achar o coddeviation do deviationid passado');
                     }
                     else
                     {
@@ -488,7 +613,7 @@
                     $codstats,
                     $published_time,
                     $allows_comments,
-                    null
+                    $codcontent
                 WHERE NOT EXISTS (SELECT coddeviation FROM deviation WHERE deviationid = $deviationid) RETURNING coddeviation";
     
                 $coddeviation = pg_fetch_object($this->conDB->exec($query))->coddeviation;
@@ -596,7 +721,7 @@
             }
             else
             {
-                throw new Exception('<pre>Exceção lançada: Não foi possível gerar a chave de acesso.<br></pre>');
+                throw new Exception('Exceção lançada: Não foi possível gerar a chave de acesso.');
                 
                 curl_close($curl);
                 return false;

@@ -90,7 +90,7 @@ class LoginManager
         }
         else
         {
-            throw new Exception("<pre>Exceção lançada: Variáveis de sessão do login não conferem com o banco de dados!</pre>");
+            throw new Exception("Exceção lançada: Variáveis de sessão do login não conferem com o banco de dados!");
         }
     }
     

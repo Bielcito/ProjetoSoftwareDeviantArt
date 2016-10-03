@@ -11,15 +11,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <meta charset="UTF-8">
     <title>Busca</title>
     <link rel="stylesheet" href="css/searchpage.css">
-
-    
+    <script type="text/javascript" src="js/cssrefresh.js"></script>
   </head>
 
   <body>
     <div>
-	<h1>Busca de tags</h1>
+	<h1>Busca</h1>
+    <h3>Os resultados mais favoritados pelos usuários serão mostrados primeiro.</h3>
     <form method="get">
-    	<input type="text" name="searchedtag" placeholder="Busca" formaction=""/>
+    	<input class="searchbar" type="text" name="searchedtag" placeholder="Busca" formaction=""/>
+        <input type="checkbox" name="tag">Pesquisar por Tag
+        <input type="checkbox" name="tag">Pesquisar por Título
+        <input type="checkbox" name="tag">Pesquisar por Categoria<br>
+        <input type="checkbox" name="tag">Ordenar por Favoritos
+        <input type="checkbox" name="tag">Pesquisar por Ordem Alfabética
+        <input type="checkbox" name="tag">Pesquisar por Número de Comentários<br>
         <button>Procurar</button>
     </form>
     </div>
@@ -30,24 +36,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         $conDB = $app->getConDB();
         
         //Verifica se enviaram uma variável chamada 'searchedtag' do tipo POST para esta página,
-        //Se for verdadeiro, então tenta logar no banco com o usuário e senha descritos.
+        //Se for verdadeiro, então tenta procurar o resultado no banco de dados.
         if(SessionManager::isGet('searchedtag'))
         {
             $searchedtag = SessionManager::getGet('searchedtag');
         
-            $query = "SELECT title, url FROM tag LEFT JOIN deviation on deviation.codtag = tag.codtag WHERE tagname='$searchedtag'";
+            $query = "SELECT deviation.title, deviation.url, stats.favourites, content.src FROM deviation 
+            LEFT JOIN tag on tag.coddeviation = deviation.coddeviation 
+            LEFT JOIN stats on deviation.codstats = stats.codstats 
+            LEFT JOIN content on deviation.codcontent = content.codcontent
+            WHERE tagname='$searchedtag' ORDER BY favourites DESC";
             $aux = $conDB->exec($query); // para executar o sql
             while($result = pg_fetch_object($aux)) //Enquanto ainda houver resultados disponíveis...
             {
                 //Do something...
                 //Para acessar algum campo, usar '$result->campo'.
-                echo $result->title.'<br>';
+                echo 'Title: '.$result->title.'<br>';
+                echo 'Favourites: '.$result->favourites.'<br>';
+                echo "<img src=\"$result->src\"><br>";
                 echo $result->url.'<br><br>';
             }
         }
-        
-        
-        
     ?>
     </div>
     
