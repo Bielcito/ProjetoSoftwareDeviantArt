@@ -24,6 +24,11 @@ body {
 {
 	width: 100%;
 }
+.tableoptions
+{
+	width: 50%;
+}
+
 .login { 
 	position: absolute;
 	top: 50%;
