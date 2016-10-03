@@ -1,3 +1,12 @@
+Para rodar o sistema, acessar o seguinte link:
+	https://myphp-bielcito.c9.io/deviantARTSTATS/
+	
+Caso ele não esteja no ar, favor enviar um e-mail para, avisando para colocar o site no ar:
+	oliveira.grdo@gmail.com
+	
+Nosso projeto está armazenado numa conta gratuita do c9.io, significa que vez ou outra a máquina pode ser desligada para dar acesso à outras.
+
+
 Observações sobre o projeto:
 	TRYs e CATCHs:
 		Não utilizamos muitos try e catches, pois por definição, quando uma exceção é lançada o sistema é parado naquele ponto e para de executar.
