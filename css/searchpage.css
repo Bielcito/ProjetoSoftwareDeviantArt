@@ -19,6 +19,9 @@ body {
 	height:100%;
 	font-family: 'Open Sans', sans-serif;
 	background: #7F9BC6;
+	border: 0px;
+	margin: 0px;
+	background-attachment:fixed;
 }
 .searchbar
 {
@@ -29,6 +32,34 @@ body {
 	width: 50%;
 }
 
+.searchconteiner
+{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+p.speech {
+  	position: absolute;
+  	font-size: 10px;
+  	text-align: center;
+  	padding: 5px;
+  	border-radius: 5px;
+  	background-color: #fff;
+  	-webkit-box-shadow: 2px 2px 4px #888;
+  	-moz-box-shadow: 2px 2px 4px #888;
+  	box-shadow: 2px 2px 4px #888;
+}
+
+p.speech:before {
+	content: ' ';
+  	position: absolute;
+  	width: 0;
+  	height: 0;
+  	left: 15px;
+  	bottom: 15px;
+  	border: 15px solid;
+  	border-color: transparent transparent white white;
+}
 .login { 
 	position: absolute;
 	top: 50%;

@@ -11,16 +11,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <meta charset="UTF-8">
     <title>Busca</title>
     <link rel="stylesheet" href="css/searchpage.css">
-    <!--script type="text/javascript" src="js/cssrefresh.js"></script-->
+    <script type="text/javascript" src="js/cssrefresh.js"></script>
+    <script type="text/javascript" src="js/searchpage.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   </head>
 
   <body>
-    <div>
+    
+    <div style="text-align: right; padding-right: 30px; padding-top: 10px">
+        <a href="logout.php">Logout</a>
+    </div>
+    
+    <div class="searchconteiner">
 	<h1>Busca</h1>
     <h3>Os resultados mais favoritados pelos usuários serão mostrados primeiro.</h3>
-    <form method="get">
-        <input id="searchbar" class="searchbar" type="text" name="searchedtag" placeholder="Busca" formaction=""/>
-        <table class="tableoptions">
+    <form method="get" onsubmit="return checkCheckbox()">
+        <input id="searchbar" class="searchbar" type="text" name="searchedtag" placeholder="Busca"/>
+        <table id="searchtableoptions" class="tableoptions">
             <tr>
                 <td><input id="tag" type="checkbox" name="tag">Pesquisar por Tag</td>
                 <td><input type="radio" name="order" value="favourite">Ordenar por Favoritos</td>
@@ -34,8 +41,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 <td><input type="radio" name="order" value="comment">Ordenar por Comentários<br></td>
             </tr>
         </table> 
-        <button>Procurar</button>
+        <button type="submit">Procurar</button>
+        <p id="speech" class="speech" style="display: none;">É necessário marcar pelo menos uma caixa!</p>
     </form>
+    
+    
     </div>
     
     <div>
@@ -58,7 +68,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 }
                 else
                 {
-                    $text .= ' AND '.$s;
+                    $text .= ' OR '.$s;
                 }
             }
         }
@@ -116,7 +126,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 }
                 else
                 {
-                    $ordertext = "";
+                    $ordertext = "ORDER BY title ASC";
                 }
             }
             
@@ -145,6 +155,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             LEFT JOIN stats on deviation.codstats = stats.codstats 
             LEFT JOIN content on deviation.codcontent = content.codcontent
             WHERE $searchtext $ordertext";
+            
+            var_dump($query);
             
             $aux = $conDB->exec($query); // para executar o sql
             while($result = pg_fetch_object($aux)) //Enquanto ainda houver resultados disponíveis...
