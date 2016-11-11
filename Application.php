@@ -8,7 +8,7 @@
     //Gerencia todo o sistema
     class Application
     {
-        function Application()
+        function __construct()
         {
             $this->conDB = new ConDB(); // inicia a conexão o PostgreSQL e realiza operações nele.
             $this->deviantManager = new DeviantManager($this->conDB); // chamadas de API ao deviantART.

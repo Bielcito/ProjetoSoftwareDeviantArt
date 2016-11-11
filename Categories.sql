@@ -27,14 +27,6 @@ CREATE TABLE IF NOT EXISTS content(
     istransparency BOOLEAN
 );;
 
-CREATE TABLE IF NOT EXISTS tag(
-    codtag SERIAL NOT NULL PRIMARY KEY,
-    tagname VARCHAR(200) NOT NULL,
-    sponsored BOOLEAN,
-    sponsor VARCHAR(200),
-    coddeviation INTEGER references deviation(coddeviation)
-);;
-
 CREATE TABLE IF NOT EXISTS deviation(
     coddeviation SERIAL NOT NULL PRIMARY KEY,
     deviationid VARCHAR(40),
@@ -51,6 +43,14 @@ CREATE TABLE IF NOT EXISTS deviation(
     publishedtime INTEGER,
     isallowcomments BOOLEAN,
     codcontent INTEGER references content(codcontent)
+);;
+
+CREATE TABLE IF NOT EXISTS tag(
+    codtag SERIAL NOT NULL PRIMARY KEY,
+    tagname VARCHAR(200) NOT NULL,
+    sponsored BOOLEAN,
+    sponsor VARCHAR(200),
+    coddeviation INTEGER references deviation(coddeviation)
 );;
 
 CREATE TABLE IF NOT EXISTS thumb(

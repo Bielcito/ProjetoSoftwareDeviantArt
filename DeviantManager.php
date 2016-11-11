@@ -6,7 +6,7 @@
     //Esta classe realiza as chamadas de API no site do deviantART e salva no banco de dados.
     class DeviantManager
     {
-        function DeviantManager($conDB) //Construtor
+        function __construct($conDB) //Construtor
         {
             //Credenciais salvas em variáveis privadas nesta classe, que são necessárias para fazer a requisição da chave de acesso.
             //A chave de acesso é utilizada para fazer requisições no deviantART, e dura por apenas 3600 segundos.

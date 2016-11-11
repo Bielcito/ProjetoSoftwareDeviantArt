@@ -2,16 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET client_encoding = 'UTF8';
+SET client_encoding = 'SQL_ASCII';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -39,14 +35,14 @@ CREATE TYPE usertype AS ENUM (
 );
 
 
-ALTER TYPE usertype OWNER TO postgres;
+ALTER TYPE public.usertype OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: author; Type: TABLE; Schema: public; Owner: postgres
+-- Name: author; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE author (
@@ -58,7 +54,7 @@ CREATE TABLE author (
 );
 
 
-ALTER TABLE author OWNER TO postgres;
+ALTER TABLE public.author OWNER TO postgres;
 
 --
 -- Name: author_codauthor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -72,7 +68,7 @@ CREATE SEQUENCE author_codauthor_seq
     CACHE 1;
 
 
-ALTER TABLE author_codauthor_seq OWNER TO postgres;
+ALTER TABLE public.author_codauthor_seq OWNER TO postgres;
 
 --
 -- Name: author_codauthor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -82,7 +78,7 @@ ALTER SEQUENCE author_codauthor_seq OWNED BY author.codauthor;
 
 
 --
--- Name: category; Type: TABLE; Schema: public; Owner: postgres
+-- Name: category; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE category (
@@ -92,7 +88,7 @@ CREATE TABLE category (
 );
 
 
-ALTER TABLE category OWNER TO postgres;
+ALTER TABLE public.category OWNER TO postgres;
 
 --
 -- Name: category_codcategory_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -106,7 +102,7 @@ CREATE SEQUENCE category_codcategory_seq
     CACHE 1;
 
 
-ALTER TABLE category_codcategory_seq OWNER TO postgres;
+ALTER TABLE public.category_codcategory_seq OWNER TO postgres;
 
 --
 -- Name: category_codcategory_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -116,7 +112,7 @@ ALTER SEQUENCE category_codcategory_seq OWNED BY category.codcategory;
 
 
 --
--- Name: content; Type: TABLE; Schema: public; Owner: postgres
+-- Name: content; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE content (
@@ -129,7 +125,7 @@ CREATE TABLE content (
 );
 
 
-ALTER TABLE content OWNER TO postgres;
+ALTER TABLE public.content OWNER TO postgres;
 
 --
 -- Name: content_codcontent_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -143,7 +139,7 @@ CREATE SEQUENCE content_codcontent_seq
     CACHE 1;
 
 
-ALTER TABLE content_codcontent_seq OWNER TO postgres;
+ALTER TABLE public.content_codcontent_seq OWNER TO postgres;
 
 --
 -- Name: content_codcontent_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -153,7 +149,7 @@ ALTER SEQUENCE content_codcontent_seq OWNED BY content.codcontent;
 
 
 --
--- Name: deviation; Type: TABLE; Schema: public; Owner: postgres
+-- Name: deviation; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE deviation (
@@ -175,7 +171,7 @@ CREATE TABLE deviation (
 );
 
 
-ALTER TABLE deviation OWNER TO postgres;
+ALTER TABLE public.deviation OWNER TO postgres;
 
 --
 -- Name: deviation_coddeviation_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -189,7 +185,7 @@ CREATE SEQUENCE deviation_coddeviation_seq
     CACHE 1;
 
 
-ALTER TABLE deviation_coddeviation_seq OWNER TO postgres;
+ALTER TABLE public.deviation_coddeviation_seq OWNER TO postgres;
 
 --
 -- Name: deviation_coddeviation_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -199,7 +195,7 @@ ALTER SEQUENCE deviation_coddeviation_seq OWNED BY deviation.coddeviation;
 
 
 --
--- Name: preview; Type: TABLE; Schema: public; Owner: postgres
+-- Name: preview; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE preview (
@@ -211,7 +207,7 @@ CREATE TABLE preview (
 );
 
 
-ALTER TABLE preview OWNER TO postgres;
+ALTER TABLE public.preview OWNER TO postgres;
 
 --
 -- Name: preview_codpreview_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -225,7 +221,7 @@ CREATE SEQUENCE preview_codpreview_seq
     CACHE 1;
 
 
-ALTER TABLE preview_codpreview_seq OWNER TO postgres;
+ALTER TABLE public.preview_codpreview_seq OWNER TO postgres;
 
 --
 -- Name: preview_codpreview_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -235,7 +231,7 @@ ALTER SEQUENCE preview_codpreview_seq OWNED BY preview.codpreview;
 
 
 --
--- Name: stats; Type: TABLE; Schema: public; Owner: postgres
+-- Name: stats; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE stats (
@@ -245,7 +241,7 @@ CREATE TABLE stats (
 );
 
 
-ALTER TABLE stats OWNER TO postgres;
+ALTER TABLE public.stats OWNER TO postgres;
 
 --
 -- Name: stats_codstats_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -259,7 +255,7 @@ CREATE SEQUENCE stats_codstats_seq
     CACHE 1;
 
 
-ALTER TABLE stats_codstats_seq OWNER TO postgres;
+ALTER TABLE public.stats_codstats_seq OWNER TO postgres;
 
 --
 -- Name: stats_codstats_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -269,7 +265,7 @@ ALTER SEQUENCE stats_codstats_seq OWNED BY stats.codstats;
 
 
 --
--- Name: tag; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tag; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tag (
@@ -281,7 +277,7 @@ CREATE TABLE tag (
 );
 
 
-ALTER TABLE tag OWNER TO postgres;
+ALTER TABLE public.tag OWNER TO postgres;
 
 --
 -- Name: tag_codtag_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -295,7 +291,7 @@ CREATE SEQUENCE tag_codtag_seq
     CACHE 1;
 
 
-ALTER TABLE tag_codtag_seq OWNER TO postgres;
+ALTER TABLE public.tag_codtag_seq OWNER TO postgres;
 
 --
 -- Name: tag_codtag_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -305,7 +301,7 @@ ALTER SEQUENCE tag_codtag_seq OWNED BY tag.codtag;
 
 
 --
--- Name: thumb; Type: TABLE; Schema: public; Owner: postgres
+-- Name: thumb; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE thumb (
@@ -318,7 +314,7 @@ CREATE TABLE thumb (
 );
 
 
-ALTER TABLE thumb OWNER TO postgres;
+ALTER TABLE public.thumb OWNER TO postgres;
 
 --
 -- Name: thumb_codthumb_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -332,7 +328,7 @@ CREATE SEQUENCE thumb_codthumb_seq
     CACHE 1;
 
 
-ALTER TABLE thumb_codthumb_seq OWNER TO postgres;
+ALTER TABLE public.thumb_codthumb_seq OWNER TO postgres;
 
 --
 -- Name: thumb_codthumb_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -342,7 +338,7 @@ ALTER SEQUENCE thumb_codthumb_seq OWNED BY thumb.codthumb;
 
 
 --
--- Name: userdata; Type: TABLE; Schema: public; Owner: postgres
+-- Name: userdata; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE userdata (
@@ -353,10 +349,10 @@ CREATE TABLE userdata (
 );
 
 
-ALTER TABLE userdata OWNER TO postgres;
+ALTER TABLE public.userdata OWNER TO postgres;
 
 --
--- Name: userdeviation; Type: TABLE; Schema: public; Owner: postgres
+-- Name: userdeviation; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE userdeviation (
@@ -366,7 +362,7 @@ CREATE TABLE userdeviation (
 );
 
 
-ALTER TABLE userdeviation OWNER TO postgres;
+ALTER TABLE public.userdeviation OWNER TO postgres;
 
 --
 -- Name: userdeviation_coduserdeviation_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -380,7 +376,7 @@ CREATE SEQUENCE userdeviation_coduserdeviation_seq
     CACHE 1;
 
 
-ALTER TABLE userdeviation_coduserdeviation_seq OWNER TO postgres;
+ALTER TABLE public.userdeviation_coduserdeviation_seq OWNER TO postgres;
 
 --
 -- Name: userdeviation_coduserdeviation_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -390,7 +386,7 @@ ALTER SEQUENCE userdeviation_coduserdeviation_seq OWNED BY userdeviation.coduser
 
 
 --
--- Name: useruser; Type: TABLE; Schema: public; Owner: postgres
+-- Name: useruser; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE useruser (
@@ -400,7 +396,7 @@ CREATE TABLE useruser (
 );
 
 
-ALTER TABLE useruser OWNER TO postgres;
+ALTER TABLE public.useruser OWNER TO postgres;
 
 --
 -- Name: useruser_coduseruser_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -414,7 +410,7 @@ CREATE SEQUENCE useruser_coduseruser_seq
     CACHE 1;
 
 
-ALTER TABLE useruser_coduseruser_seq OWNER TO postgres;
+ALTER TABLE public.useruser_coduseruser_seq OWNER TO postgres;
 
 --
 -- Name: useruser_coduseruser_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -2794,6 +2790,7 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 342	0DF23FEE-B809-E10B-A74C-209E459D5FA3	null	http://aurorawienhold.deviantart.com/art/Jack-Frost-340311032	Jack Frost	65	t	f	f	f	128	396	1354196679	t	1727
 343	EC653451-591E-4881-F08E-0A45AE243FF2	null	http://oswalddent.deviantart.com/art/Beetlejuice-197160517	Beetlejuice	125	f	f	f	f	145	397	1297542522	t	1728
 344	8648D694-80CF-192B-4D01-8A1DAA07A368	null	http://pearlgraygallery.deviantart.com/art/arturia-pen-dra-guin-567481250	arturia pen(dra)guin	54	t	f	f	f	146	398	1445432437	t	1729
+433	FB6003F4-1C32-FDB4-E80A-73DB41E85C74	null	http://cherriuki.deviantart.com/art/Pansy-308281927	Pansy	37	f	f	f	f	37	487	1339660836	t	1818
 345	99BF6ED1-C58A-E41C-DC8B-61EC27E943AB	null	http://honeyball-cookie.deviantart.com/art/Painting-Brushes-Highquality-148193331	Painting Brushes - Highquality	48	t	f	f	f	147	399	1261938883	t	1730
 346	C62C4920-1472-EFBF-B475-7864B6E82953	null	http://daverapoza.deviantart.com/art/Black-Witch-Bull-dog-Fennec-Fox-527293399	Black Witch  Bull dog Fennec Fox	32	t	f	f	f	148	400	1429220167	t	1731
 347	74BB810C-BCDB-3AC4-5F3B-AC69FB0BDE00	null	http://jane-beata.deviantart.com/art/Watercolor-gel-pen-texture-II-357229112	Watercolor, gel pen texture II	61	f	f	f	f	59	401	1362223781	t	1732
@@ -2877,7 +2874,6 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 428	19828FB1-6B3A-6CB3-CCC4-41F60A31073A	null	http://laovaan.deviantart.com/art/Remember-Me-596330546	Remember Me	26	f	f	f	f	40	482	1457857491	t	1813
 430	E914A66A-3841-CEB6-9D11-C06566CDDDD3	3112F74F-64B1-E5A7-5AF2-241446F50D72	http://agnes-cecile.deviantart.com/art/Legami-505568782	Legami	63	f	f	f	f	48	484	1420671543	t	1815
 431	78A98F7E-C516-F16C-3F46-FC5BD8732D7C	A538B49B-23D9-AD50-4A0C-68426CF562C1	http://agnes-cecile.deviantart.com/art/imaginary-illness-529998873	imaginary illness	64	f	f	f	f	48	485	1430348436	t	1816
-433	FB6003F4-1C32-FDB4-E80A-73DB41E85C74	null	http://cherriuki.deviantart.com/art/Pansy-308281927	Pansy	37	f	f	f	f	37	487	1339660836	t	1818
 434	CC810FE2-DEE4-5693-0152-CFC83DC65E08	null	http://martanael.deviantart.com/art/Emotional-510375591	Emotional	63	f	f	f	f	160	488	1422553323	t	1819
 435	6782D83F-5CC4-FC3A-C10E-6BA84347B656	null	http://rubisfirenos.deviantart.com/art/Japanese-Painting-Aurora-Chinese-Dragon-515572305	Japanese Painting - Aurora Chinese Dragon	93	f	f	f	f	165	489	1424552651	t	1820
 436	8E35FF32-F584-279B-8384-799EEF18C6B9	5E93F397-A3EF-4A69-304A-99B30A7457BD	http://cindy-r.deviantart.com/art/Purple-Owl-537891832	Purple Owl	126	f	f	f	f	177	490	1433615607	t	1821
@@ -2960,6 +2956,7 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 518	BAC8B9A7-86D4-8F04-CA21-40AD3AD0CBFB	2B21DEB2-8C2F-A22D-F3FA-FFD4432B6311	http://transparentghost.deviantart.com/art/Release-Me-284647012	Release Me	83	t	f	f	f	201	572	1329059666	t	1903
 519	A822E9AF-3495-9602-B9DC-B145BB75C4EF	null	http://b-agt.deviantart.com/art/Draw-This-Again-Contest-Cloud-325808314	Draw This Again Contest: Cloud	145	t	f	f	f	197	573	1347013156	t	1904
 520	EAEF338E-08A9-93E0-E872-6FB01BB34849	null	http://lucky978.deviantart.com/art/50-Jellyfish-515127579	50- Jellyfish	98	f	f	f	f	94	574	1424382132	t	1905
+783	375B5388-6065-2249-7B4F-8C67F7D0A90F	null	http://cherriuki.deviantart.com/art/Meihua-295630822	Meihua	37	f	f	f	f	37	837	1334240559	t	2166
 521	63E2FF03-7D4B-073E-D249-69072A90FE24	null	http://built4ever.deviantart.com/art/House-382-Color-Portrait-610165402	House 382 Color Portrait	138	f	f	f	f	97	575	1463774625	t	1906
 522	978F05FF-4594-4BDD-DA01-F733C2F0BCC0	69272ED7-C0CF-4336-173E-AFA0CA820DC2	http://nicolasjolly.deviantart.com/art/National-day-Watercolor-394892064	National day - Watercolor	55	t	f	f	f	137	576	1377103974	t	1907
 523	C0086E64-2A14-202C-CC5A-AF3D186ADEBF	null	http://scarlett-aimpyh.deviantart.com/art/Blue-fairy-and-black-dragon-516644907	Blue fairy and black dragon	93	t	f	f	f	50	577	1425145509	t	1908
@@ -3210,7 +3207,6 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 780	D6C4CDC4-9A69-64DF-689E-BB8A97B844A7	null	http://shel-yang.deviantart.com/art/noise-from-silence-6-108797965	noise from silence 6	97	t	f	f	f	267	834	1231408726	t	2163
 781	4B10CD0C-6D34-19F2-F909-C1EC30F35AE2	null	http://reneenault.deviantart.com/art/Alice-in-Wonderland-set-355961899	Alice in Wonderland set	73	t	f	f	f	268	835	1361630547	t	2164
 782	C4FC398D-0C03-D33A-F6C8-FAE9011B7C79	null	http://ullakko.deviantart.com/art/There-Again-632101752	There Again	55	f	f	f	f	124	836	1472842848	t	2165
-783	375B5388-6065-2249-7B4F-8C67F7D0A90F	null	http://cherriuki.deviantart.com/art/Meihua-295630822	Meihua	37	f	f	f	f	37	837	1334240559	t	2166
 784	E8AE4E70-D6AD-BD98-6236-1FE5B0DA9F0A	null	http://b-agt.deviantart.com/art/C-S-FFACC-291683996	C.S. FFACC	80	t	f	f	f	197	838	1332425576	t	2167
 785	8871209D-B858-08C7-0511-2FC14CF31E3F	null	http://laovaan.deviantart.com/art/The-Arrival-442396203	The Arrival	64	f	f	f	f	40	839	1395619307	t	2168
 786	FA1D7D25-7433-26FB-CDFA-79FFDC7F01BB	764967AD-59AD-3922-2EBD-059C5BBB8DB0	http://justcallmemike.deviantart.com/art/Orca-2-446142745	Orca -2	166	t	f	f	f	269	840	1396962341	t	2169
@@ -3458,6 +3454,7 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 1042	3A7A2896-7341-2D0A-CC92-8B3C33DC26C9	null	http://kipine.deviantart.com/art/Clockwork-Ghost-575733715	Clockwork Ghost	184	t	f	f	f	335	1096	1449069012	t	2424
 1043	BE781DF0-38F5-D52C-94F9-285D3E80CB10	null	http://lady2.deviantart.com/art/won-t-know-your-name-348994668	won&#039;t_know_your_name.	95	f	f	f	f	30	1097	1358447408	t	2425
 1044	1EE3EFD8-82F6-53E4-9ABD-675A327615F7	null	http://scebiqu.deviantart.com/art/pinup-sketches-173837688	pinup sketches	91	t	f	f	f	336	1098	1280844953	t	2426
+1305	D8E5857F-5FD8-3994-BA91-137B9456B098	null	http://shivita.deviantart.com/art/Eevee-140177633	Eevee	202	t	f	f	f	277	1359	1255467147	f	2687
 1045	27445CC3-D359-AD21-99A2-84A8233356FF	null	http://zephiriara.deviantart.com/art/Guardian-of-The-Dreamland-Realm-494191790	Guardian of The Dreamland Realm	93	f	f	f	f	337	1099	1415847752	t	2427
 1046	5A062865-FF53-7EEF-0F1A-70970BB5BFCD	null	http://cherriuki.deviantart.com/art/Heart-Candy-355570412	Heart Candy	97	f	f	f	f	37	1100	1361445072	t	2428
 1047	C767C034-AE51-1A16-2205-BF55E0E0DB84	DFFF7DA9-89DA-9728-00AD-68481F6608FD	http://emperpep.deviantart.com/art/Fairy-Bazaar-250-372911980	Fairy Bazaar : 250	95	t	f	f	f	74	1101	1369123875	t	2429
@@ -3706,7 +3703,6 @@ COPY deviation (coddeviation, deviationid, printid, url, title, codcategory, isd
 1302	27F53791-A7B2-2D8E-CC55-999425914BF7	null	http://dierat.deviantart.com/art/Paper-Pack-9-269825102	Paper Pack 9	61	t	f	f	f	61	1356	1321740111	t	2684
 1303	55641FEF-3B64-083A-2F71-A60F857035CA	null	http://p-e-a-k.deviantart.com/art/Bali-Scenery-19507315	Bali Scenery	55	t	f	f	f	413	1357	1118902100	t	2685
 1304	5F67E6C0-927F-1C91-BC0E-409C84AB5706	null	http://cherriuki.deviantart.com/art/Commission-Falling-Blossoms-281599313	Commission: Falling Blossoms	37	f	f	f	f	37	1358	1327587835	t	2686
-1305	D8E5857F-5FD8-3994-BA91-137B9456B098	null	http://shivita.deviantart.com/art/Eevee-140177633	Eevee	202	t	f	f	f	277	1359	1255467147	f	2687
 196	0D9E94E4-C923-8151-0E10-B8EC6D217FE1	null	http://agnes-cecile.deviantart.com/art/I-Could-But-I-Can-t-on-sheet-music-612564319	I Could But I Can&#039;t on sheet music	66	f	f	f	f	48	250	1464796807	t	1583
 1	AAF1856E-80E0-44FC-D3FC-F1149112F463	null	http://yatona.deviantart.com/art/Elias-Ainsworth-636667960	*Elias Ainsworth* 	1	t	f	f	f	1	26	1474891649	t	1384
 26	2F933781-B78F-CCC4-E434-669E880AD658	null	http://lilaccu.deviantart.com/art/About-Digital-Painting-Brushes-Photoshop-349926721	About Digital Painting Brushes ( Photoshop )	48	t	f	f	f	23	80	1358871833	t	1414
@@ -17859,6 +17855,8 @@ SELECT pg_catalog.setval('thumb_codthumb_seq', 3977, true);
 
 COPY userdata (username, password, email, usertype) FROM stdin;
 bielcito	th3f0das	oliveira.grdo@gmail.com	client
+larissa	123	larissa@larissa.com	client
+pioia	tutu	patipc@hotmail.com	client
 \.
 
 
@@ -17893,7 +17891,7 @@ SELECT pg_catalog.setval('useruser_coduseruser_seq', 1, false);
 
 
 --
--- Name: author_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: author_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY author
@@ -17901,7 +17899,7 @@ ALTER TABLE ONLY author
 
 
 --
--- Name: category_categorypath_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: category_categorypath_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY category
@@ -17909,7 +17907,7 @@ ALTER TABLE ONLY category
 
 
 --
--- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY category
@@ -17917,7 +17915,7 @@ ALTER TABLE ONLY category
 
 
 --
--- Name: content_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: content_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY content
@@ -17925,7 +17923,7 @@ ALTER TABLE ONLY content
 
 
 --
--- Name: deviation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: deviation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY deviation
@@ -17933,7 +17931,7 @@ ALTER TABLE ONLY deviation
 
 
 --
--- Name: preview_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: preview_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY preview
@@ -17941,7 +17939,7 @@ ALTER TABLE ONLY preview
 
 
 --
--- Name: stats_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: stats_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY stats
@@ -17949,7 +17947,7 @@ ALTER TABLE ONLY stats
 
 
 --
--- Name: tag_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tag
@@ -17957,7 +17955,7 @@ ALTER TABLE ONLY tag
 
 
 --
--- Name: thumb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: thumb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY thumb
@@ -17965,7 +17963,7 @@ ALTER TABLE ONLY thumb
 
 
 --
--- Name: userdata_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: userdata_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY userdata
@@ -17973,7 +17971,7 @@ ALTER TABLE ONLY userdata
 
 
 --
--- Name: userdata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: userdata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY userdata
@@ -17981,7 +17979,7 @@ ALTER TABLE ONLY userdata
 
 
 --
--- Name: userdeviation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: userdeviation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY userdeviation
@@ -17989,7 +17987,7 @@ ALTER TABLE ONLY userdeviation
 
 
 --
--- Name: useruser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: useruser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY useruser

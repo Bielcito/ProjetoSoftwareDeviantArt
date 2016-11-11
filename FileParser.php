@@ -2,7 +2,7 @@
 
 class FileParser
 {
-    function FileParser()
+    function __construct()
     {
         try
         {

@@ -1,7 +1,4 @@
 <?php
-    
-    //Importa a página login.php para o index.php, assim ela abre na página inicial:
-
     ini_set('max_execution_time', 5000);
     
     header('Content-Type: text/html; charset=UTF-8');

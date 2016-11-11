@@ -6,7 +6,7 @@ require_once('SessionManager.php');
 //já gerenciando tudo certinho no SessionManager e salvando as informações no banco de dados também.
 class LoginManager
 {
-    function LoginManager($conDB)
+    function __construct($conDB)
     {
         $this->conDB = $conDB;
     }

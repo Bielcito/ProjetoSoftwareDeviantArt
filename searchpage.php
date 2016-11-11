@@ -11,8 +11,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <meta charset="UTF-8">
     <title>Busca</title>
     <link rel="stylesheet" href="css/searchpage.css">
-    <script type="text/javascript" src="js/cssrefresh.js"></script>
-    <script type="text/javascript" src="js/searchpage.js"></script>
+    <!--script type="text/javascript" src="js/cssrefresh.js"></script-->
+    <!--script type="text/javascript" src="js/searchpage.js"></script-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   </head>
 
@@ -156,8 +156,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             LEFT JOIN content on deviation.codcontent = content.codcontent
             WHERE $searchtext $ordertext";
             
-            var_dump($query);
-            
             $aux = $conDB->exec($query); // para executar o sql
             while($result = pg_fetch_object($aux)) //Enquanto ainda houver resultados disponíveis...
             {
@@ -170,6 +168,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 echo $result->url.'<br><br>';
             }
         }
+        
+        /*
+        
+            SELECT deviation.coddeviation, deviation.title FROM deviation 
+            LEFT JOIN tag on tag.coddeviation = deviation.coddeviation 
+            WHERE tagname LIKE '%cat%' ORDER BY title;
+        
+        */
     ?>
     </div>
     

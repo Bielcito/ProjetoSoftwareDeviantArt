@@ -16,7 +16,7 @@
                 'dbhost' => 'localhost',
                 'dbname' => 'devartdb',
                 'dbuser' => 'postgres',
-                'dbpassword' => '1240'
+                'dbpassword' => 'th3f0das'
             );
         }
     }

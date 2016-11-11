@@ -3,7 +3,7 @@
     
     class ConDB
     {
-        function ConDB()
+        function __construct()
         {
             $this->dbname = Credentials::DB()['dbname'];
             $this->dbuser = Credentials::DB()['dbuser'];
