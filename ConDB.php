@@ -5,10 +5,11 @@
     {
         function __construct()
         {
-            $this->dbname = Credentials::DB()['dbname'];
-            $this->dbuser = Credentials::DB()['dbuser'];
-            $this->dbpassword = Credentials::DB()['dbpassword'];
-            $this->dbhost = Credentials::DB()['dbhost'];
+        	new Credentials(); // Permite a utilização das credenciais nesta classe.
+            $this->dbname = Credentials::DB()->dbname;
+            $this->dbuser = Credentials::DB()->dbuser;
+            $this->dbpassword = Credentials::DB()->dbpassword;
+            $this->dbhost = Credentials::DB()->dbhost;
             $this->isInTransaction = false;
         }
         

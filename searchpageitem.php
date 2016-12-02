@@ -1,55 +1,48 @@
 <!DOCTYPE html>
-<!--
-Copyright (c) 2016 by Tyler Fry (http://codepen.io/frytyler/pen/EGdtg)
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
-
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Busca</title>
+    <title>deviantARTSTATS - Busca por Itens</title>
     <link rel="stylesheet" href="css/searchpage.css">
-    <!--script type="text/javascript" src="js/cssrefresh.js"></script-->
-    <!--script type="text/javascript" src="js/searchpage.js"></script-->
+    <script type="text/javascript" src="js/searchpage.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--script type="text/javascript" src="js/cssrefresh.js"></script-->
   </head>
 
   <body>
     
     <div style="text-align: right; padding-right: 30px; padding-top: 10px">
-        <a href="logout.php">Logout</a>
+        <a href="logout.php">Logout</a> <a href="Lista.php">Minha Lista</a>
     </div>
     
     <div class="searchconteiner">
-	<h1>Busca</h1>
-    <h3>Os resultados mais favoritados pelos usuários serão mostrados primeiro.</h3>
-    <form method="get" onsubmit="return checkCheckbox()">
-        <input id="searchbar" class="searchbar" type="text" name="searchedtag" placeholder="Busca"/>
-        <table id="searchtableoptions" class="tableoptions">
-            <tr>
-                <td><input id="tag" type="checkbox" name="tag">Pesquisar por Tag</td>
-                <td><input type="radio" name="order" value="favourite">Ordenar por Favoritos</td>
-            </tr>
-            <tr>
-                <td><input id="title" type="checkbox" name="title">Pesquisar por Título</td> 
-                <td><input type="radio" name="order" value="order">Ordernar por Ordem Alfabética</td> 
-            </tr>
-            <tr>
-                <td><input id="category" type="checkbox" name="category">Pesquisar por Categoria</td>
-                <td><input type="radio" name="order" value="comment">Ordenar por Comentários<br></td>
-            </tr>
-        </table> 
-        <button type="submit">Procurar</button>
-        <p id="speech" class="speech" style="display: none;">É necessário marcar pelo menos uma caixa!</p>
-    </form>
-    
-    
+		<h1>Busca por itens</h1>
+	    <h3>Utilize as caixinhas para melhorar sua busca.</h3>
+	    <form method="get" onsubmit="return checkCheckbox()">
+	        <input id="searchbar" class="searchbar" type="text" name="searchedtag" placeholder="Busca" required/>
+	        <table id="searchtableoptions" class="tableoptions">
+	            <tr>
+	                <td><input id="tag" type="checkbox" name="tag">Pesquisar por Tag</td>
+	                <td><input type="radio" name="order" value="favourite">Ordenar por Favoritos</td>
+	            </tr>
+	            <tr>
+	                <td><input id="title" type="checkbox" name="title">Pesquisar por Título</td> 
+	                <td><input type="radio" name="order" value="order">Ordenar por Título</td> 
+	            </tr>
+	            <tr>
+	                <td><input id="category" type="checkbox" name="category">Pesquisar por Categoria</td>
+	                <td><input type="radio" name="order" value="comment" required>Ordenar por Comentários<br></td>
+	            </tr>
+	        </table> 
+	        <button type="submit">Procurar</button>
+	        <p id="speech" class="speech" style="display: none;">É necessário marcar pelo menos uma caixa!</p>
+	    </form>
     </div>
     
     <div>
     <?php
+    	include_once('Application.php');
+    	
         $app = new Application();
         $conDB = $app->getConDB();
         
@@ -150,32 +143,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 helper($searchtext, $categorytext, $v);
             }
         
-            $query = "SELECT DISTINCT deviation.title, deviation.url, stats.favourites, content.src, stats.comments FROM deviation 
+            $query = "SELECT DISTINCT deviation.coddeviation, deviation.title, deviation.url, stats.favourites, content.src, stats.comments FROM deviation 
             LEFT JOIN tag on tag.coddeviation = deviation.coddeviation 
             LEFT JOIN stats on deviation.codstats = stats.codstats 
             LEFT JOIN content on deviation.codcontent = content.codcontent
             WHERE $searchtext $ordertext";
             
             $aux = $conDB->exec($query); // para executar o sql
+            $line = 0;
+            
             while($result = pg_fetch_object($aux)) //Enquanto ainda houver resultados disponíveis...
             {
                 //Do something...
                 //Para acessar algum campo, usar '$result->campo'.
-                echo 'Title: '.$result->title.'<br>';
+                echo 'Title: '.$result->title.' ';
+                echo '<button id=button'.$line.' onclick="buttonClick('.$result->coddeviation.', '.$line.')"> Adicionar à Minha Lista </button><br>';
                 echo 'Favourites: '.$result->favourites.' ';
                 echo 'Comments: '.$result->comments.'<br>';
                 echo "<img src=\"$result->src\"><br>";
                 echo $result->url.'<br><br>';
+                $line++;
             }
         }
-        
-        /*
-        
-            SELECT deviation.coddeviation, deviation.title FROM deviation 
-            LEFT JOIN tag on tag.coddeviation = deviation.coddeviation 
-            WHERE tagname LIKE '%cat%' ORDER BY title;
-        
-        */
     ?>
     </div>
     
